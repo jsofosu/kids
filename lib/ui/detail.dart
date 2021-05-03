@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/fit.dart';
-import './cart.dart';
 import '../providers/cartprovider.dart';
 
 class Detail extends StatefulWidget {
@@ -16,6 +15,8 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartModel>(context);
+    final crtitems = Provider.of<CartModel>(context).cartitems;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -29,20 +30,29 @@ class _DetailState extends State<Detail> {
         ),
       ),
       backgroundColor: Color(0xffedefee),
-      body: Stack(children: [
-        Container(
-          height: (MediaQuery.of(context).size.height / 2) + 50,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              color: Color(0xffedefee),
-              image: DecorationImage(
-                  image: AssetImage(widget.out.image), fit: BoxFit.fitHeight)),
-        ),
-        Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: (MediaQuery.of(context).size.height / 2.2),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Color(0xffedefee),
+                image: DecorationImage(
+                  alignment: Alignment.topCenter,
+                  image: AssetImage(
+                    widget.out.image,
+                  ),
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: (MediaQuery.of(context).size.height / 2) - 50,
+                height: (MediaQuery.of(context).size.height / 2.4),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
@@ -52,78 +62,99 @@ class _DetailState extends State<Detail> {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                                child: Container(
-                                    width:
-                                        (MediaQuery.of(context).size.width) / 2,
-                                    child: Text(widget.out.name,
-                                        style: TextStyle(
-                                            fontSize: 28,
-                                            fontFamily: 'Lora')))),
-                            Text(widget.out.price.toString(),
-                                style: Theme.of(context).textTheme.bodyText1)
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Container(
-                            child: Flexible(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              width: (MediaQuery.of(context).size.width) / 2,
+                              child: Text(
+                                widget.out.name,
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontFamily: 'Lora',
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            widget.out.price.toString(),
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Container(
+                        child: Flexible(
                           child: Text(
                             widget.out.description,
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
-                        )),
-                        SizedBox(height: 5),
-                        Text('CHOOSE YOUR SIZE',
-                            style: TextStyle(fontSize: 15)),
-                        SizedBox(height: 5),
-                        Row(children: [
-                          Sizes('S'),
-                          Sizes('M'),
-                          Sizes('L'),
-                          Sizes('XL')
-                        ]),
-                        SizedBox(height: 5),
-                        GestureDetector(
-                          onTap: () {
-                            cart.add(widget.out);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 0),
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.shopping_cart),
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Cart()));
-                                    },
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text('Add to Cart',
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1)
-                                ]),
-                            decoration: BoxDecoration(
-                              color: Color(0xff3e3e70),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                          ),
-                        )
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        'CHOOSE YOUR SIZE',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Row(children: [
+                        Sizes('S'),
+                        Sizes('M'),
+                        Sizes('L'),
+                        Sizes('XL')
                       ]),
-                )))
-      ]),
+                      SizedBox(height: 5),
+                      GestureDetector(
+                        onTap: () {
+                          setState(
+                              () => widget.out.incart = !widget.out.incart);
+                          crtitems.contains(widget.out)
+                              ? cart.removeitem(widget.out)
+                              : cart.add(widget.out);
+                        },
+                        child: Container(
+                          margin:
+                              EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                icon: widget.out.incart
+                                    ? Icon(Icons.remove_shopping_cart)
+                                    : Icon(Icons.shopping_cart),
+                                onPressed: () {},
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                widget.out.incart
+                                    ? 'Added to cart'
+                                    : 'Add to Cart',
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color(0xff3e3e70),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
