@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './ui/home.dart';
 import 'providers/cartprovider.dart';
-import './model/collect.dart';
 import './model/fit.dart';
 
 void main() {
@@ -16,7 +15,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CartModel()),
-        ChangeNotifierProvider(create: (context) => ColectionModel()),
         ChangeNotifierProvider(create: (context) => Clothes())
       ],
       child: MaterialApp(

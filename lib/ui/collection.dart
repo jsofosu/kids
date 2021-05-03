@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../model/fit.dart';
-import '../ui/detail.dart';
+import 'detail.dart';
 
 class Collection extends StatelessWidget {
   @override
@@ -19,26 +19,21 @@ class Collection extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, '/home');
             },
+            highlightColor: Colors.white,
           ),
         ),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              'Kids',
-              style: TextStyle(fontSize: 36, fontFamily: 'Lora'),
-            ),
-            Text(
-              'Collections',
-              style: TextStyle(fontSize: 36, fontFamily: 'Lora'),
-            ),
+            Font('Kids', 36),
+            Font('Collections', 36),
+            SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 25,
                     crossAxisSpacing: 10,
-                    childAspectRatio: 0.9,
                   ),
                   itemCount: availitem.length,
                   itemBuilder: (context, i) {
@@ -55,19 +50,25 @@ class Collection extends StatelessWidget {
                             );
                           },
                           child: Container(
-                              height: 160,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xffedefee),
-                                  image: DecorationImage(
-                                      fit: BoxFit.fitHeight,
-                                      image: AssetImage(availitem[i].image))),
-                              width: (MediaQuery.of(context).size.width) / 2),
+                            height: 160,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xffedefee),
+                              image: DecorationImage(
+                                alignment: Alignment.topCenter,
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  availitem[i].image,
+                                ),
+                              ),
+                            ),
+                            width: (MediaQuery.of(context).size.width) / 2,
+                          ),
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Casual',
+                          availitem[i].category,
                           style: TextStyle(fontSize: 20),
                         )
                       ],
@@ -76,5 +77,22 @@ class Collection extends StatelessWidget {
             )
           ],
         ));
+  }
+}
+
+class Font extends StatelessWidget {
+  final String text;
+  final double size;
+  Font(this.text, this.size);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: size,
+        fontFamily: 'Lora',
+      ),
+    );
   }
 }

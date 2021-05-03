@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/profilecard.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -6,122 +7,75 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  List<ProfileCard> profile = [
+    ProfileCard('Personal Info', 'Phone, Email Address, Shipping', Icons.book),
+    ProfileCard('Payment', 'Credit Card Information', Icons.card_giftcard),
+    ProfileCard('Password', 'For safety change regularly', Icons.security),
+    ProfileCard('Purchase List', 'Your shopping history',
+        Icons.shopping_basket_outlined)
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffedefee),
-      body: Stack(children: [
-        SafeArea(
-          child: Container(
-            height: (MediaQuery.of(context).size.height / 2) - 100,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Color(0xffedefee),
-            ),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Container(
-                width: 150,
-                height: 120,
-                margin: EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.lightBlueAccent,
-                ),
-              ),
-              Text(
-                'Angela Smith',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Lora',
-                ),
-              ),
-              SizedBox(height: 5),
-              Text('angela@gmail.com'),
-            ]),
-          ),
-        ),
-        Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: (MediaQuery.of(context).size.height / 2) + 35,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                    color: Colors.white),
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(30, 30, 30, 20),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ProfileCard(),
-                        ProfileCard(),
-                        ProfileCard(),
-                        ProfileCard(),
-                      ]),
-                )))
-      ]),
-    );
-  }
-}
-
-class ProfileCard extends StatelessWidget {
-  const ProfileCard({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.book,
-                      size: 26,
-                    ),
-                    Container(
-                      //color: Colors.red,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Personal Info',
-                              style: TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.w600)),
-                          SizedBox(height: 10),
-                          Text(
-                            'Phone, Email Address, Shipping',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w200,
-                                fontFamily: 'Poppins'),
-                          )
-                        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: (MediaQuery.of(context).size.height / 2) - 100,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 150,
+                    height: 120,
+                    margin: EdgeInsets.only(bottom: 10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage('images/profile.jpg'),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_right_alt),
-                      onPressed: () {},
-                    )
-                  ]),
-              SizedBox(height: 18),
-              Divider(color: Colors.grey)
-            ],
-          ),
+                  ),
+                  Text(
+                    'Angela Smith',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Lora',
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text('angela@gmail.com'),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+              width: MediaQuery.of(context).size.width,
+              height: (MediaQuery.of(context).size.height / 2) + 50,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white),
+              child: ListView.separated(
+                itemCount: profile.length,
+                itemBuilder: (context, i) {
+                  return Container(child: profile[i]);
+                },
+                separatorBuilder: (context, index) {
+                  return Divider(color: Colors.grey);
+                },
+              ),
+            ),
+          ],
         ),
-        SizedBox(height: 22),
-      ],
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/homewidgets.dart';
-import './collecton.dart';
+import 'collection.dart';
 import './cart.dart';
 import './profile.dart';
 
@@ -88,9 +88,17 @@ class Home extends StatelessWidget {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          height: (MediaQuery.of(context).size.height) / 2,
-          color: Color(0xffedefee),
-          child: Image.asset('images/kidd1.png'),
+          height: (MediaQuery.of(context).size.height) / 2 + 150,
+          decoration: BoxDecoration(
+            color: Color(0xffedefee),
+            image: DecorationImage(
+              alignment: Alignment.topCenter,
+              fit: BoxFit.cover,
+              image: AssetImage(
+                'images/Msweat1.png',
+              ),
+            ),
+          ),
         ),
       ]),
     );
