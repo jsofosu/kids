@@ -95,7 +95,7 @@ class Home extends StatelessWidget {
               alignment: Alignment.topCenter,
               fit: BoxFit.cover,
               image: AssetImage(
-                'images/Msweat1.png',
+                'images/msweat1.png',
               ),
             ),
           ),
