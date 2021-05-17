@@ -31,7 +31,7 @@ class Clothes with ChangeNotifier {
         description:
             'Wear comfy sweaters that would keep you warm during the cold. Your kids would love it so you better buy. Thank you',
         price: 120,
-        image: 'images/Msweat1.png'),
+        image: 'images/msweat1.png'),
     Outline(
         id: '002',
         name: 'Elegant and Warm Sweater',
@@ -71,7 +71,7 @@ class Clothes with ChangeNotifier {
         description:
             'Wear comfy sweaters that would keep you warm during the cold. Your kids would love it so you better buy. Thank you',
         price: 120,
-        image: 'images/Msweater2.png'),
+        image: 'images/msweater2.png'),
     Outline(
       id: '007',
       name: 'Cheer Uniform',
