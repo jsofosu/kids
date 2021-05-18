@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kids/ui/home.dart';
 import 'package:kids/widgets/cartitemswidgets.dart';
 import '../providers/cartprovider.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,12 @@ class _CartState extends State<Cart> {
           elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios_outlined),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Index(),
+              ),
+            ),
           ),
         ),
         body: SingleChildScrollView(
