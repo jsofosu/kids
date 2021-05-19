@@ -55,7 +55,7 @@ class Home extends StatelessWidget {
         SafeArea(
             child: Container(
           height: 50,
-          margin: EdgeInsets.fromLTRB(25, 50, 20, 20),
+          margin: EdgeInsets.fromLTRB(28, 50, 28, 20),
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
@@ -76,7 +76,7 @@ class Home extends StatelessWidget {
               Tabs('images/glov_icon.png', int.parse('0xffd8e2ea'), 'Gloves'),
               Tabs('images/bg_icon.png', int.parse('0xfff6efe0'), 'Bags'),
               Tabs('images/jeans_icon.png', int.parse('0xffe8e1db'), 'Jeans'),
-              Tabs('images/cap_icon.png', int.parse('0xffe0eeea'), 'Dress'),
+              Tabs('images/dress.png', int.parse('0xffe0eeea'), 'Dress'),
             ]),
           ),
         ),
