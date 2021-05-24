@@ -1,5 +1,6 @@
 # Kids Clothing UI Clone
 
+A cross platform mobile app to shop for kids clothing. 
 ## Dribbble Reference by [Dwinawan](https://dribbble.com/dwinawan)
 ![Dwinawan](https://github.com/jsofosu/kids/blob/master/UI%20Reference.png)
 
@@ -18,6 +19,10 @@ Home
 ![Home](/screenshots/profile.png)|  
 
 ## Features
+* Display the collection of kids clothes
+* View details about selected clothes
+* Save items to cart
+* Swipe card to delete item from cart
 * Beautiful Design
 * Custom Bottom Navigation
 * Readable code
@@ -30,3 +35,7 @@ Home
 ## Technologies
 * Dart 2.12.2
 * Flutter 2.0.4
+
+## Third Party Packages
+
+ [provider](https://pub.dev/packages/provider) for state management
